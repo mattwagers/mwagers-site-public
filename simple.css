@@ -171,6 +171,32 @@ ul.people li {
 	font-weight:normal;
 }
 
+.people-group h3,
+.event-group h3,
+.presentation-group h3,
+.year-group h3 {
+    margin-bottom: 0.25em;
+    font-size: 1em;
+}
+
+.event-list {
+    padding-left: 0;
+}
+
+.event-list > li {
+    padding: 0;
+}
+
+.event-headline {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+.annotated-list p {
+    margin-bottom: 0.25em;
+    margin-top: 0.25em;
+}
+
 ul.dashed {
   list-style-type: none;
 }

@@ -17,12 +17,12 @@
   <body>
     <div id="container">
       <header>
-        <div style="margin:-0.5em 0em 1em 1em;font-size:.85em;float:right;font-family:monospace">
+        <nav aria-label="Profile links" style="margin:-0.5em 0em 1em 1em;font-size:.85em;float:right;font-family:monospace">
           ◰ <a href="https://people.ucsc.edu/~mwagers/wagers_cv.pdf">c.v.</a>&nbsp;
           ◳ <a href="https://scholar.google.com/citations?user=OtEyO5MAAAAJ&amp;hl=en">scholar</a>
           ◲ <a itemprop="sameAs" content="https://orcid.org/0000-0002-3139-2380" href="https://orcid.org/0000-0002-3139-2380" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;">ORCID</a>
           ◱ <a href="https://www.linkedin.com/in/matt-wagers-ba93b81/">LinkedIn</a>
-        </div>
+        </nav>
         <h1 style="font-size:3em;margin:0.25em;">
           <a href="index.html" style="text-decoration:none;color:black;background:white">Matt Wagers</a>
         </h1>
@@ -48,13 +48,13 @@
             </ul>
           </div>
           <div id="navigation">
-            <nav>
+            <nav aria-label="Site">
               <ul>
                 <li><a href="research.html">research</a></li>
-                <li><a href="https://sites.google.com/a/ucsc.edu/s-lab/past-years?authuser=0" target="_blank">s/lab</a><br></li>
+                <li><a href="https://sites.google.com/a/ucsc.edu/s-lab/past-years?authuser=0" target="_blank" rel="noopener noreferrer">s/lab</a><br></li>
                 <li><a href="index.html#past-teaching">teaching</a></li>
-                <li><a href="http://chamorro.sites.ucsc.edu" target="_blank">chamorro psycholinguistics</a></li>
-                <li><a href="https://babel.ucsc.edu/animacy/" target="_blank">zapotec &amp; hebrew psylx</a></li>
+                <li><a href="http://chamorro.sites.ucsc.edu" target="_blank" rel="noopener noreferrer">chamorro psycholinguistics</a></li>
+                <li><a href="https://babel.ucsc.edu/animacy/" target="_blank" rel="noopener noreferrer">zapotec &amp; hebrew psylx</a></li>
               </ul>
             </nav>
           </div>
@@ -70,7 +70,7 @@
       </header>
 
 
-    <article id="wagers_research">
+    <main id="wagers_research">
         
     <section class="outlined">
         <span style="float:right;font-size:1.25em">⎌ <a href="index.html">back to home</a></span>    
@@ -94,7 +94,7 @@
     
 </ul>
         
-        <nav>
+        <nav aria-label="Research sections">
             <ul class="people" style="font-size:1em;padding-left:0;padding-bottom:0.5em; border-bottom:1px dashed black"><li>◸ <a href="#articles">Original research articles</a></li>
                 <li>◹ <a href="#chapters">Chapters, tutorials &amp; commentary</a></li>
                 <li>◿ <a href="#slides">Selected posters and slides</a></li>
@@ -115,22 +115,22 @@
     <col style="width:5%">
     <thead>
         <tr>
-            <th>
+            <th scope="col">
                 year
             </th>
-            <th>
+            <th scope="col">
                 title
             </th>
-            <th>
+            <th scope="col">
                 authors
             </th>
-            <th>
+            <th scope="col">
                 citation
             </th>
-            <th>
+            <th scope="col" aria-label="access links">
                 ⿻
             </th>
-            <th>
+            <th scope="col" aria-label="data and materials links">
                 ⿳
             </th>
         </tr>
@@ -1078,6 +1078,9 @@
     </section>
     <section class="outlined" id="chapters">
         <p style="float:right">⎌ <a href="#">back to top</a></p>    
+        <h2>
+            Chapters, tutorials &amp; commentary
+        </h2>
         
         
         
@@ -1094,22 +1097,22 @@
     <col style="width:5%">
     <thead>
         <tr>
-            <th>
+            <th scope="col">
                 year
             </th>
-            <th>
+            <th scope="col">
                 title
             </th>
-            <th>
+            <th scope="col">
                 authors
             </th>
-            <th>
+            <th scope="col">
                 citation
             </th>
-            <th>
+            <th scope="col" aria-label="access links">
                 ⿻
             </th>
-            <th>
+            <th scope="col" aria-label="data and materials links">
                 ⿳
             </th>
         </tr>
@@ -1474,127 +1477,143 @@
                     
     <p>A selection of older posters &amp; slides reporting interesting but unpublished work [more than 5 years old]</p>
 
-<dl>
-    
-        <dt style="font-weight:bold">
+
+    <section class="presentation-group" aria-labelledby="presentations-1">
+        <h3 id="presentations-1">
             Chamorro Psycholinguistics Project
-        </dt>
-        
-            <dd id="ChaAcrossGenerations">
+        </h3>
+        <ul>
+    
+            <li id="ChaAcrossGenerations">
                 <a href="presentations/ChamorroAcrossGenerationsIslands.MemorialPark_Sep2014.pdf">The Chamorro language across islands and generations</a>. 2014. Presentation delivered to a series of community groups on Rota (Ufisinan Mayot), Tinian (Public Library) and Saipan (American Memorial Park) in September 2014. Documents change and constancy in the comprehension of complex sentences and word structure across generations, and islands, of the Marianas.
-            </dd>
-        
+            </li>
     
-        <dt style="font-weight:bold">
+        </ul>
+    </section>
+
+    <section class="presentation-group" aria-labelledby="presentations-2">
+        <h3 id="presentations-2">
             Memory &amp; Prediction
-        </dt>
-        
-            <dd>
+        </h3>
+        <ul>
+    
+            <li>
                 <a href="presentations/WagersDillon.DlinkingROCs.CEMS2020.pdf">Which sentences do speakers favor? ROC analysis of d-linking in filler-gap integration</a>. With Brian Dillon. 2020 Context and Episodic Memory Symposium, University of Pennsylvania, August 17-19, 2020. <span style="font-style:oblique;color:darkblue">D-linking doesn't improve acceptability of extraction 😬</span>.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="presentations/FoleyWagers.ProminenceScalesGeorgian.CUNY2020.pdf">Prominence scales guide incremental sentence comprehension in Georgian</a>. With Steven Foley*. Thirty-third Annual CUNY Conference on Human Sentence Processing, University of Massachusetts, Amherst, MA, March 19-21, 2020.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="presentations/HammerlyDillonWagers.GrammaticalityAsymmetryROC_CUNY2019.pdf">Reassessing the grammaticality asymmetry in agreement attraction: an ROC analysis</a>. With Christopher Hammerley* &amp; Brian Dillon. Thirty-second Annual CUNY Conference on Human Sentence Processing, Boulder, CO.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="presentations/BenMeirVanHandel.VerbsRetrieveSubjectsNotClauses.CUNY2019.pdf">Verbs retrieve subjects, not clausal attachment sites</a>. With Netta Ben-Meir* &amp; Nick Van Handel*. Thirty-second Annual CUNY Conference on Human Sentence Processing, Boulder, CO, March 29-31, 2019.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="presentations/Miller.LimitedReactivationInNPE.CUNY29.pdf">Limited reactivation in noun phrase ellipsis</a>. With Chelsea Miller*. Twenty-ninth Annual CUNY Conference on Human Sentence Processing, Gainesville, FL, March 3-5, 2016.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="presentations/Structuring%20Expectation%20WCCFL33.pdf">Structuring expectation</a>. <em>Invited address</em>, <a href="https://sites.google.com/site/wccflsfu/home">WCCFL 33</a>, Simon Fraser University, Vancouver: March 27-29, 2015.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="presentations/VillataMcElreeWagersFranck.DynamicsWeakIslandsSAT.CUNY28.pdf">Temporal dynamics of weak islands: a speed-accuracy tradeoff study</a>. With Sandra Villata*, Brian McElree and Julie Franck, Twenty-eighth Annual CUNY Conference on Human Sentence Processing, Los Angeles, CA, March 19-21, 2015.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="presentations/KingAndrewsWagers.2012.CunyReflexivesPoster.pdf">Do reflexives always find a grammatical antecedent for themselves?</a> With Joseph King* and Caroline Andrews. Twenty-fifth Annual CUNY Conference for Human Sentence Processing, New York, March 14-16, 2012.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="presentations/cuny2010.antilocality.pdf">Anti-local contexts increase the overall speed of dependency completion</a>.<br/> Talk slides from Twenty-third Annual CUNY Conference on Human Sentence Processing, New York, NY, March 19-21, 2010.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="presentations/2009.AMLAP.WagersMcElree.FocalAttn.pdf">Focal attention and the timing of memory retrieval in language comprehension</a>. With <a href="https://as.nyu.edu/content/nyu-as/as/faculty/brian-mcelree.html">Brian McElree</a>. Talk slides from the Fifteenth Annual Architectures and Mechanisms for Language Processing Conference, Barcelona, Spain, September 7-9, 2009.
-            </dd>
-        
+            </li>
     
-        <dt style="font-weight:bold">
+        </ul>
+    </section>
+
+    <section class="presentation-group" aria-labelledby="presentations-3">
+        <h3 id="presentations-3">
             Agreement and Wh-Movement
-        </dt>
-        
-            <dd>
+        </h3>
+        <ul>
+    
+            <li>
                 <a href="presentations/FoleyWagers.GeorgianRCs.CUNY2017.pdf">Subject gaps are still easiest: relative clause processing and Georgian split ergativity</a>, With Steven Foley*, Thirtieth Annual CUNY Conference on Human Sentence Processing, Cambridge, MA, March 30-April 1, 2017.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="http://people.ucsc.edu/~mwagers/presentations/Lau_Wagers_Phillips_collectives_CUNY2009.pdf">The consequences of number agreement on number interpretation.</a> 2009. With Ellen Lau* &amp; Colin Phillips. Poster given at the 22nd Annual CUNY Conference on Human Sentence Processing, Davis, CA, March 26-28.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 Agreement and the subject of confusion. 2008. With Ellen Lau*, Clare Stroud &amp; Colin Phillips. Talk presented at the 21st Annual CUNY Conference on Human Sentence Processing, Chapel Hill, NC, March 13-15.
-            </dd>
-        
-            <dd>
+            </li>
+    
+            <li>
                 <a href="presentations/caputo-nimbark_etal-cuny2007.pdf">The impact of resolved filler-gap dependencies on later dependency completion.</a> 2007. With Roshni Caputo-Nimbark, Paul Hines, Rebecca Larson, Jessica Levy, Andrea Longini, Hana Quon &amp; Claude Smith. Poster presented at the 20th Annual CUNY Conference on Human Sentence Processing, La Jolla, CA, March 29-31.
-            </dd>
-        
+            </li>
     
-        <dt style="font-weight:bold">
+        </ul>
+    </section>
+
+    <section class="presentation-group" aria-labelledby="presentations-4">
+        <h3 id="presentations-4">
             Pragmatics
-        </dt>
-        
-            <dd>
-                <a href="presentations/KrollWagers.ParentheticalsAtIssue.XPRAG2017.pdf">Interaction of parentheticals, (not-)at-issue content, and working memory</a>. With Margaret Kroll*. Seventh Biennial Experimental Pragmatics Conference, Cologne, June 21-23, 2017.
-            </dd>
-        
-            <dd>
-                <a href="presentations/AnandAndrewsWagers2011.XpragImplicatures.pdf">Implicature calculation and the pragmatics of experiments.</a> 2011. With Pranav Anand and Caroline Andrews. 4th Experimental Pragmatics (XPRAG) meeting, Barcelona, June 2-4, 2011.
-            </dd>
-        
+        </h3>
+        <ul>
     
-</dl>
+            <li>
+                <a href="presentations/KrollWagers.ParentheticalsAtIssue.XPRAG2017.pdf">Interaction of parentheticals, (not-)at-issue content, and working memory</a>. With Margaret Kroll*. Seventh Biennial Experimental Pragmatics Conference, Cologne, June 21-23, 2017.
+            </li>
+    
+            <li>
+                <a href="presentations/AnandAndrewsWagers2011.XpragImplicatures.pdf">Implicature calculation and the pragmatics of experiments.</a> 2011. With Pranav Anand and Caroline Andrews. 4th Experimental Pragmatics (XPRAG) meeting, Barcelona, June 2-4, 2011.
+            </li>
+    
+        </ul>
+    </section>
+
 
                 </section>
                 <section id="neuroscience">
                     <h2>
                         Neuroscience
                     </h2>
-                    <dl>
-                        <dt>
+                    <article aria-labelledby="pnas2003">
+                        <p>
                             As an undergraduate I was fortunate to work on two very interesting projects on the anatomy of the brain. The first, while I was an RA in the lab of <a href="https://en.wikipedia.org/wiki/Charles_G._Gross">Charles Gross</a>, concerned the life-cycle and spatial distribution of newly-born neurons in the adult neocortex. The principal investigator of the project was <a href="http://www.princeton.edu/~goulde/">Elizabeth Gould</a>. It was an exciting time to be involved in this kind of research since the existence and extent of adult neurogenesis was still controversial and not well understood.
-                        </dt>
-                        <dd id="pnas2003">
+                        </p>
+                        <p id="pnas2003">
                             Gould, E., Vail, N.,  Wagers, M., Gross, C.G. (2001). <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC58573/">Adult-generated hippocampal and neocortical neurons in macaques have a transient existence.</a> <em>Proceedings of the National Academy of Sciences USA, 98</em>, 10910-7.
-                        </dd>
-                        <dt>
+                        </p>
+                    </article>
+                    <article aria-labelledby="axonscaling">
+                        <p>
                             The second project was about white matter scaling, while I was a part of <a href="https://scholar.princeton.edu/wanglab/home">Sam Wang</a>'s lab: how the axon size distribution and fraction of myelinated axons changes with increasing brain size. Part of this paper was developed in my A.B. thesis, <a href="http://arks.princeton.edu/ark:/88435/dsp01v118rg475">Optimization of Neocortical White Matter under Constraints of Time and Space</a>. This part of the research showed that as brain size increases, the center of the size distribution of myelinated axons does not shift, but its positive skew does: the fraction of very large axons grows. This has the consequence that the <em>minimum</em> cross-brain conduction time is essentially preserved across brain sizes.
-                        </dt>
-                        <dd id="axonscaling">
+                        </p>
+                        <p id="axonscaling">
                             Wang, S.S., Shultz, J.R., Burish, M.J., Harrison, K.H., Hof, P.R., Towns, L.C., Wagers, M.W., Wyatt, K.D. (2008). <a href="http://www.ncbi.nlm.nih.gov/pubmed/18400904">Functional trade-offs in white matter axonal scaling.</a> <em>Journal of Neuroscience, 28</em>, 4047-56.
-                        </dd>
-                        <dt>
+                        </p>
+                    </article>
+                    <p>
                             Although my core interests shifted to linguistics and cognitive science, my inchoate life as a neuroscientist did inspire my linguistic interests - particular, in thinking about how compositional representations are biologically encoded.
-                        </dt>
-                    </dl>
+                    </p>
                 </section>
-            </article>
+            </main>
 
       <footer>
         <details>
           <summary><small>Last modified: <!--#echo var="LAST_MODIFIED" --></small></summary>
-          <h3 style="margin:0.1em;font-weight:400">〠 Questions or feedback? Please <a href="mailto:mwagers@ucsc.edu">email me</a>.</h3>
+          <p style="margin:0.1em;font-weight:400">〠 Questions or feedback? Please <a href="mailto:mwagers@ucsc.edu">email me</a>.</p>
           <address>
             Stevenson College<br>
             University of California, Santa Cruz<br>
