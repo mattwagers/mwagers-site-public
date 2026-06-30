@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSYC 51 · Language in Our Class</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --purple: #4C44AB;
+  --purple-light: #AFA9EC;
+  --purple-bg: #EEEDFE;
+  --teal: #1A9068;
+  --amber: #A86D14;
+  --coral: #C24E2A;
+  --blue: #1557A0;
+  --text: #1C1B18;
+  --text-muted: #5C5B57;
+  --text-faint: #9B9A96;
+  --border: #E5E4DF;
+  --bg: #FAFAF8;
+  --card: #FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Source Sans 3',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;}
+
+.page{max-width:880px;margin:0 auto;padding:0 1.5rem 4rem;}
+
+/* HEADER */
+.site-header{padding:2.5rem 0 2rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem;}
+.site-header .course{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:.5rem;}
+.site-header h1{font-family:'Lora',Georgia,serif;font-size:30px;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:.35rem;}
+.site-header .byline{font-size:13px;color:var(--text-faint);}
+
+/* SURVEY META STATS */
+.survey-stats{display:flex;gap:2.5rem;margin-bottom:2.75rem;flex-wrap:wrap;}
+.stat-item .num{font-family:'Lora',Georgia,serif;font-size:26px;font-weight:600;color:var(--purple);line-height:1;}
+.stat-item .lbl{font-size:11px;color:var(--text-faint);margin-top:2px;letter-spacing:.02em;}
+
+/* Q SECTIONS */
+.q-section{margin-bottom:2.5rem;}
+.q-header{margin-bottom:.875rem;}
+.q-label{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);background:var(--purple-bg);padding:2px 8px;border-radius:20px;margin-bottom:.4rem;}
+.q-title{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:500;color:var(--text);line-height:1.35;margin-bottom:.2rem;}
+.q-meta{font-size:11px;color:var(--text-faint);}
+.q-note{font-size:13px;color:var(--text-muted);margin-top:.4rem;font-style:italic;}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;}
+
+/* CONTROLS (Q1) */
+.ctrl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
+.ctrl-stats{font-size:12px;color:var(--text-faint);}
+.tab-group{display:flex;gap:5px;}
+.tab-btn{font-family:inherit;font-size:12px;padding:4px 12px;border-radius:6px;cursor:pointer;}
+.tab-btn.active{border:1px solid rgba(76,68,171,.35);background:rgba(76,68,171,.07);color:var(--purple);}
+.tab-btn.inactive{border:1px solid var(--border);background:transparent;color:var(--text-muted);}
+
+.toggle-strip{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:7px 10px;background:var(--bg);border-radius:7px;border:1px solid var(--border);flex-wrap:wrap;}
+.toggle-strip label{display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none;}
+.toggle-strip label span{font-size:12px;color:var(--text);}
+.toggle-strip .hint{font-size:11px;color:var(--text-faint);}
+.legend-row{display:none;gap:14px;margin-bottom:10px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted);}
+.swatch{width:10px;height:10px;border-radius:2px;display:inline-block;}
+
+#wordcloud{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:center;padding:1.5rem .5rem;min-height:200px;}
+
+/* CHART */
+.chart-wrap{position:relative;width:100%;}
+
+/* Q6 */
+.q6-layout{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.q6-text{flex:1;min-width:180px;}
+.q6-text .big{font-family:'Lora',Georgia,serif;font-size:34px;font-weight:600;color:var(--purple);line-height:1;margin-bottom:.25rem;}
+.q6-text .sub{font-size:14px;color:var(--text-muted);line-height:1.5;}
+
+/* Q7 CALLOUT */
+.callout{display:flex;gap:1.25rem;background:var(--purple-bg);border-left:4px solid var(--purple);border-radius:0 8px 8px 0;padding:1.1rem 1.4rem;margin-bottom:1.25rem;align-items:center;flex-wrap:wrap;}
+.callout-stat{text-align:center;min-width:64px;}
+.callout-stat .n{font-family:'Lora',serif;font-size:38px;font-weight:600;color:var(--purple);line-height:1;}
+.callout-stat .l{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);opacity:.75;}
+.callout-vs{font-family:'Lora',serif;font-size:20px;color:var(--purple-light);}
+.callout-text{font-size:14px;color:var(--text-muted);line-height:1.6;flex:1;min-width:200px;}
+.callout-text strong{color:var(--text);}
+
+/* COMPARISON LEGEND */
+.comp-legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;}
+.comp-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted);}
+
+/* CHART SUBSECTION LABEL */
+.chart-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.chart-sublabel{font-size:11px;color:var(--text-faint);margin-bottom:10px;}
+
+/* FOOTNOTE */
+.footnote{font-size:11px;color:var(--text-faint);margin-top:10px;padding-top:8px;border-top:1px solid var(--border);line-height:1.55;}
+.footnote strong{color:var(--text-muted);}
+
+@media(max-width:600px){
+  .site-header h1{font-size:24px;}
+  .callout{flex-direction:column;gap:.75rem;}
+  .q6-layout{gap:1rem;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="course">PSYC 51 · April 30, 2026</div>
+  <h1>Language in Our Class</h1>
+  <div class="byline">In-class survey · 143 participants · 7 activities</div>
+</header>
+
+<!-- META STATS -->
+<div class="survey-stats">
+  <div class="stat-item"><div class="num">143</div><div class="lbl">Participants</div></div>
+  <div class="stat-item"><div class="num">7</div><div class="lbl">Activities</div></div>
+  <div class="stat-item"><div class="num">127</div><div class="lbl">Avg. responses / activity</div></div>
+  <div class="stat-item"><div class="num" id="numLangs">—</div><div class="lbl">Languages identified</div></div>
+</div>
+
+<!-- ── Q1 ── -->
+<section class="q-section" id="q1">
+  <div class="q-header">
+    <span class="q-label">Q1 · Open-ended · 213 responses · 107 participants</span>
+    <h2 class="q-title">What languages do you use or know?</h2>
+    <p class="q-note">Responses normalized and de-duplicated per person.</p>
+  </div>
+  <div class="card">
+    <div class="ctrl-row">
+      <span id="q1stats" class="ctrl-stats"></span>
+      <div class="tab-group">
+        <button class="tab-btn active" id="btnBar" onclick="showTab('bar')">Bar chart</button>
+        <button class="tab-btn inactive" id="btnCloud" onclick="showTab('cloud')">Word cloud</button>
+      </div>
+    </div>
+    <div class="toggle-strip">
+      <label>
+        <input type="checkbox" id="varToggle" onchange="rebuild()" style="width:14px;height:14px;accent-color:#4C44AB;cursor:pointer;">
+        <span>Show more specific varieties</span>
+      </label>
+      <span id="varHint" class="hint"></span>
+    </div>
+    <div id="legendRow" class="legend-row">
+      <div class="legend-item"><span class="swatch" style="background:#1A9068;"></span>English varieties</div>
+      <div class="legend-item"><span class="swatch" style="background:#A86D14;"></span>Spanish varieties</div>
+      <div class="legend-item"><span class="swatch" style="background:#4C44AB;"></span>Other languages</div>
+    </div>
+    <div id="viewBar">
+      <div id="barWrap" class="chart-wrap">
+        <canvas id="langChart" role="img" aria-label="Horizontal bar chart of languages used by class respondents, ranked by number of unique users">Language frequency by unique speakers.</canvas>
+      </div>
+    </div>
+    <div id="viewCloud" style="display:none;"><div id="wordcloud"></div></div>
+    <p class="footnote">Typos fixed · Español → Spanish · English dialect qualifiers (American, California, British, Singapore) collapsed to English · Chinese → Mandarin · De-duplicated per respondent · Non-language responses removed · <strong>African American English, Spanglish, Chinglish, Taishanese, Taiwanese preserved as distinct</strong></p>
+  </div>
+</section>
+
+<!-- ── Q2 ── -->
+<section class="q-section" id="q2">
+  <div class="q-header">
+    <span class="q-label">Q2 · Multiple choice · 117 responses · 106 participants</span>
+    <h2 class="q-title">How many languages are currently used today?</h2>
+  </div>
+  <div class="card">
+    <div class="chart-wrap" style="height:185px;">
+      <canvas id="worldLangsChart" role="img" aria-label="Bar chart of responses to how many languages are used today; 4,000–8,000 correct answer shown in purple">4,000–8,000 was chosen by 40% of respondents and is the closest to current estimates.</canvas>
+    </div>
+    <p class="footnote">The commonly cited estimate is <strong>~7,000 languages</strong> (Ethnologue / Glottolog), placing 4,000–8,000 as the best answer, highlighted in purple. 78% of respondents chose either that range or &gt;10,000.</p>
+  </div>
+</section>
+
+<!-- ── Q3 ── -->
+<section class="q-section" id="q3">
+  <div class="q-header">
+    <span class="q-label">Q3 · Multiple choice · 140 responses · 111 participants</span>
+    <h2 class="q-title">If you use more than one language, when did you learn or start using your additional language(s)?</h2>
+  </div>
+  <div class="card">
+    <div class="chart-wrap" style="height:200px;">
+      <canvas id="acquisitionChart" role="img" aria-label="Bar chart of language acquisition age; 52% learned as a baby or toddler">Over half learned their additional language as a baby or toddler.</canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ── Q4 ── -->
+<section class="q-section" id="q4">
+  <div class="q-header">
+    <span class="q-label">Q4 · Multiple choice · 125 responses · 125 participants</span>
+    <h2 class="q-title">Have you used language technologies (GenAI, speech recognition, autocorrect…) in languages other than English?</h2>
+    <p class="q-note">60% have used non-English language technology at least occasionally.</p>
+  </div>
+  <div class="card">
+    <div class="chart-wrap" style="height:185px;">
+      <canvas id="techChart" role="img" aria-label="Bar chart of frequency of non-English language technology use; 60% use it at least occasionally">60% have used language tech in a non-English language at least occasionally.</canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ── Q5 ── -->
+<section class="q-section" id="q5">
+  <div class="q-header">
+    <span class="q-label">Q5 · Multiple choice · 99 responses · 87 participants</span>
+    <h2 class="q-title">How would you describe that non-English language technology experience?</h2>
+    <p class="q-note">Only 5% found it as good or better than using similar technology in English.</p>
+  </div>
+  <div class="card">
+    <div class="chart-wrap" style="height:225px;">
+      <canvas id="qualityChart" role="img" aria-label="Bar chart of quality of non-English language technology experience; 5% as good as English, 50% usable with minor issues">50% found it usable with minor imperfections; only 5% found it as good as English.</canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ── Q6 ── -->
+<section class="q-section" id="q6">
+  <div class="q-header">
+    <span class="q-label">Q6 · Multiple choice · 111 responses · 111 participants</span>
+    <h2 class="q-title">Have you ever participated in a language experiment or study?</h2>
+  </div>
+  <div class="card">
+    <div class="q6-layout">
+      <div class="chart-wrap" style="height:155px;width:155px;flex-shrink:0;">
+        <canvas id="studyParticipChart" role="img" aria-label="Donut chart: 59% yes, 41% no">59% yes, 41% no.</canvas>
+      </div>
+      <div class="q6-text">
+        <div class="big">59%</div>
+        <div class="sub">have participated in a language study<br>
+          <span style="color:var(--text-faint);font-size:12px;">66 of 111 respondents</span>
+        </div>
+        <div style="margin-top:.85rem;font-size:13px;color:var(--text-muted);font-style:italic;border-left:3px solid var(--purple-light);padding-left:.65rem;">In what language was that study conducted?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Q7 ── -->
+<section class="q-section" id="q7">
+  <div class="q-header">
+    <span class="q-label">Q7 · Open-ended · 86 responses · 76 participants</span>
+    <h2 class="q-title">If you participated in a language study, what language was it conducted in?</h2>
+  </div>
+
+  <div class="callout">
+    <div class="callout-stat"><div class="n" id="classLangN">—</div><div class="l">languages<br>in class</div></div>
+    <div class="callout-vs">→</div>
+    <div class="callout-stat"><div class="n">7</div><div class="l">languages<br>in studies</div></div>
+    <div class="callout-text">
+      This class represents remarkable linguistic breadth — yet the studies most of you have participated in were conducted in just <strong>7 languages</strong>, with <strong>English alone accounting for over 80%</strong> of all study instances. The gap visualized below updates when you toggle varieties in Q1.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="chart-label">Language distribution: this class vs. studies attended</div>
+    <div class="chart-sublabel">Percentage of total language instances · class figures update with the Q1 variety toggle</div>
+    <div class="chart-wrap" style="height:155px;">
+      <canvas id="comparisonChart" role="img" aria-label="Stacked horizontal bar chart comparing language distribution in class versus in language studies; English dominates studies">English dominates the study distribution far more than in this class.</canvas>
+    </div>
+    <div class="comp-legend">
+      <div class="comp-legend-item"><span class="swatch" style="background:#4C44AB;"></span>English</div>
+      <div class="comp-legend-item"><span class="swatch" style="background:#A86D14;"></span>Spanish</div>
+      <div class="comp-legend-item"><span class="swatch" style="background:#D85A30;"></span>Hindi</div>
+      <div class="comp-legend-item"><span class="swatch" style="background:#1A9068;"></span>French</div>
+      <div class="comp-legend-item"><span class="swatch" style="background:#1557A0;"></span>Mandarin</div>
+      <div class="comp-legend-item"><span class="swatch" style="background:#C5C4BE;"></span>All others</div>
+    </div>
+
+    <div style="height:1px;background:var(--border);margin:1.25rem 0;"></div>
+
+    <div class="chart-label">Languages of studies attended — full breakdown</div>
+    <div class="chart-sublabel">81 language instances from 78 valid respondents · N/A and opt-out responses excluded</div>
+    <div class="chart-wrap" style="height:255px;">
+      <canvas id="studyLangChart" role="img" aria-label="Horizontal bar chart of languages studies were conducted in; English 66, Spanish 8, French 2, then 1 each for Hindi, Mandarin, German, Japanese, and JSL">English (66) and Spanish (8) account for 91% of all study language instances.</canvas>
+    </div>
+    <p class="footnote">N/A responses (7) and "I said no" (1) excluded. Typos normalized (Englis→English, Jpanease→Japanese). Combined responses ("English and French," "Japanese and JSL," "Translating Spanish and English words") split into individual language instances. JSL = Japanese Sign Language.</p>
+  </div>
+</section>
+
+</div>
+
+
+<script>
+/* ===== Q1: PRE-COMPUTED COUNTS (language names only — no raw responses or user IDs) ===== */
+const countsCollapsed={
+  "spanish":28,"english-spanish":1,"japanese":2,"english":80,"russian":5,
+  "american sign language":1,"taishanese":2,"hindi":8,"cantonese":4,"greek":1,
+  "tamil":2,"african american english":1,"arabic":2,"telugu":4,"bengali":2,
+  "spanglish":3,"mandarin":8,"taiwanese":1,"tagalog":4,"korean":3,"kannada":2,
+  "french":7,"latin":1,"vietnamese":1,"turkish":1,"german":2,"chinglish":1,
+  "igbo":1,"pashto":1,"mongolian":1,"marathi":1,"khmer":1,"urdu":1,"bulgarian":2,
+  "punjabi":1,"czech":1,"malayalam":1
+};
+const countsVarieties={
+  "spanish":25,"english-spanish":1,"japanese":2,"mexican-spanish":2,"english":74,
+  "russian":5,"american sign language":1,"taishanese":2,"california-english":1,
+  "hindi":8,"cantonese":4,"greek":1,"tamil":2,"african american english":1,
+  "arabic":2,"telugu":4,"bengali":2,"spanglish":3,"mandarin":8,"taiwanese":1,
+  "tagalog":4,"korean":3,"kannada":2,"french":7,"american-english":4,"latin":1,
+  "vietnamese":1,"colombian-spanish":1,"turkish":1,"german":2,"chinglish":1,
+  "igbo":1,"californian-english":1,"standard-american-english":1,"pashto":1,
+  "mongolian":1,"marathi":1,"singapore-english":1,"khmer":1,"british-english":1,
+  "urdu":1,"bulgarian":2,"punjabi":1,"czech":1,"malayalam":1
+};
+const displayCollapsed={
+  "spanish":"Spanish","english-spanish":"English\u2013Spanish","japanese":"Japanese",
+  "english":"English","russian":"Russian","american sign language":"Amer. Sign Language",
+  "taishanese":"Taishanese","hindi":"Hindi","cantonese":"Cantonese","greek":"Greek",
+  "tamil":"Tamil","african american english":"African Am. English","arabic":"Arabic",
+  "telugu":"Telugu","bengali":"Bengali","spanglish":"Spanglish","mandarin":"Mandarin",
+  "taiwanese":"Taiwanese","tagalog":"Tagalog","korean":"Korean","kannada":"Kannada",
+  "french":"French","latin":"Latin","vietnamese":"Vietnamese","turkish":"Turkish",
+  "german":"German","chinglish":"Chinglish","igbo":"Igbo","pashto":"Pashto",
+  "mongolian":"Mongolian","marathi":"Marathi","khmer":"Khmer","urdu":"Urdu",
+  "bulgarian":"Bulgarian","punjabi":"Punjabi","czech":"Czech","malayalam":"Malayalam"
+};
+const displayVarieties={
+  ...displayCollapsed,
+  "mexican-spanish":"Mexican Spanish","california-english":"California English",
+  "american-english":"American English","colombian-spanish":"Colombian Spanish",
+  "californian-english":"Californian English","standard-american-english":"Standard Am. English",
+  "singapore-english":"Singapore English","british-english":"British English"
+};
+const englishVarKeys=new Set(["american-english","british-english","california-english",
+  "californian-english","singapore-english","standard-american-english"]);
+const spanishVarKeys=new Set(["colombian-spanish","mexican-spanish"]);
+
+/* ===== Q1: CHART STATE ===== */
+let langChartInst=null,compChartInst=null;
+
+function varietyType(key){
+  if(englishVarKeys.has(key))return'english';
+  if(spanishVarKeys.has(key))return'spanish';
+  return null;
+}
+function barColor(i,total,key,showVar){
+  const t=i/Math.max(total-1,1);
+  if(showVar){
+    const vt=varietyType(key);
+    if(vt==='english')return`rgba(26,144,104,${.92-t*.35})`;
+    if(vt==='spanish')return`rgba(168,109,20,${.92-t*.35})`;
+  }
+  return`rgba(76,68,171,${1-t*.55})`;
+}
+function cloudColor(key,t,showVar){
+  const a=.35+t*.65;
+  if(showVar){
+    const vt=varietyType(key);
+    if(vt==='english')return`rgba(26,144,104,${a})`;
+    if(vt==='spanish')return`rgba(168,109,20,${a})`;
+  }
+  return`rgba(76,68,171,${a})`;
+}
+
+function rebuild(){
+  const showVar=document.getElementById('varToggle').checked;
+  const counts=showVar?countsVarieties:countsCollapsed;
+  const display=showVar?displayVarieties:displayCollapsed;
+
+  const sorted=Object.entries(counts)
+    .map(([key,count])=>({key,display:display[key]||key,count}))
+    .sort((a,b)=>b.count-a.count);
+  const total=sorted.reduce((s,x)=>s+x.count,0);
+
+  document.getElementById('q1stats').textContent=`${sorted.length} languages · ${total} unique user–language pairs`;
+  document.getElementById('numLangs').textContent=sorted.length;
+  document.getElementById('classLangN').textContent=sorted.length;
+
+  if(showVar){
+    const nEn=sorted.filter(d=>varietyType(d.key)==='english').length;
+    const nEs=sorted.filter(d=>varietyType(d.key)==='spanish').length;
+    const parts=[];
+    if(nEn)parts.push(`${nEn} English variet${nEn!==1?'ies':'y'}`);
+    if(nEs)parts.push(`${nEs} Spanish variet${nEs!==1?'ies':'y'}`);
+    document.getElementById('varHint').textContent=parts.join(' · ');
+    document.getElementById('legendRow').style.display='flex';
+  } else {
+    document.getElementById('varHint').textContent='';
+    document.getElementById('legendRow').style.display='none';
+  }
+  rebuildBarChart(sorted,showVar);
+  rebuildWordCloud(sorted,showVar);
+  rebuildComparisonChart();
+}
+
+function rebuildBarChart(sorted,showVar){
+  document.getElementById('barWrap').style.height=(sorted.length*28+60)+'px';
+  if(langChartInst){langChartInst.destroy();langChartInst=null;}
+  langChartInst=new Chart(document.getElementById('langChart'),{
+    type:'bar',
+    data:{
+      labels:sorted.map(d=>d.display),
+      datasets:[{
+        label:'Unique users',data:sorted.map(d=>d.count),
+        backgroundColor:sorted.map((d,i)=>barColor(i,sorted.length,d.key,showVar)),
+        borderRadius:3,borderSkipped:false,
+      }]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.parsed.x} speaker${ctx.parsed.x!==1?'s':''}`}}},
+      scales:{
+        x:{grid:{color:'rgba(0,0,0,.06)'},border:{display:false},ticks:{font:{size:11},color:'#9B9A96'},title:{display:true,text:'Unique speakers',font:{size:11},color:'#9B9A96'}},
+        y:{grid:{display:false},border:{display:false},ticks:{font:{size:12},color:'#1C1B18',autoSkip:false}}
+      }
+    }
+  });
+}
+
+function rebuildWordCloud(sorted,showVar){
+  const wc=document.getElementById('wordcloud'); wc.innerHTML='';
+  const maxC=sorted[0].count,minC=sorted[sorted.length-1].count;
+  for(const{key,display,count}of[...sorted].sort(()=>Math.random()-.5)){
+    const t=(count-minC)/Math.max(maxC-minC,1);
+    const fs=Math.round(13+t*51);
+    const el=document.createElement('span');
+    el.textContent=display; el.title=`${count} speaker${count!==1?'s':''}`;
+    el.style.cssText=`font-size:${fs}px;font-weight:${fs>28?600:400};color:${cloudColor(key,t,showVar)};cursor:default;white-space:nowrap;line-height:1.2;font-family:inherit;`;
+    wc.appendChild(el);
+  }
+}
+
+function rebuildComparisonChart(){
+  /* Bucket collapsed class counts — English/Spanish varieties always rolled up here */
+  const englishForms=new Set(["english","american-english","california-english",
+    "californian-english","british-english","standard-american-english","singapore-english"]);
+  const spanishForms=new Set(["spanish","mexican-spanish","colombian-spanish"]);
+  const cb={English:0,Spanish:0,Hindi:0,French:0,Mandarin:0,Other:0};
+  let ct=0;
+  for(const[k,v]of Object.entries(countsCollapsed)){
+    ct+=v;
+    if(englishForms.has(k))cb.English+=v;
+    else if(spanishForms.has(k))cb.Spanish+=v;
+    else if(k==='hindi')cb.Hindi+=v;
+    else if(k==='french')cb.French+=v;
+    else if(k==='mandarin')cb.Mandarin+=v;
+    else cb.Other+=v;
+  }
+  const sb={English:66,Spanish:8,Hindi:1,French:2,Mandarin:1,Other:3};
+  const st=81;
+  const langs=['English','Spanish','Hindi','French','Mandarin','Other'];
+  const colors=['#4C44AB','#A86D14','#D85A30','#1A9068','#1557A0','#C5C4BE'];
+  const datasets=langs.map((lang,i)=>({
+    label:lang==='Other'?'All others':lang,
+    data:[parseFloat((cb[lang]/ct*100).toFixed(1)),parseFloat((sb[lang]/st*100).toFixed(1))],
+    backgroundColor:colors[i],borderRadius:2,
+  }));
+  if(compChartInst){compChartInst.destroy();compChartInst=null;}
+  compChartInst=new Chart(document.getElementById('comparisonChart'),{
+    type:'bar',
+    data:{labels:['This class','Studies attended'],datasets},
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.x.toFixed(1)}%`}}
+      },
+      scales:{
+        x:{stacked:true,max:100,grid:{color:'rgba(0,0,0,.06)'},border:{display:false},ticks:{font:{size:11},color:'#9B9A96',callback:v=>v+'%'}},
+        y:{stacked:true,grid:{display:false},border:{display:false},ticks:{font:{size:13},color:'#1C1B18'}}
+      }
+    }
+  });
+}
+
+function showTab(tab){
+  const isBar=tab==='bar';
+  document.getElementById('viewBar').style.display=isBar?'':'none';
+  document.getElementById('viewCloud').style.display=isBar?'none':'';
+  document.getElementById('btnBar').className='tab-btn '+(isBar?'active':'inactive');
+  document.getElementById('btnCloud').className='tab-btn '+(isBar?'inactive':'active');
+}
+
+/* ===== Q2–Q6: STATIC CHARTS ===== */
+function buildStaticCharts(){
+
+  new Chart(document.getElementById('worldLangsChart'),{
+    type:'bar',
+    data:{
+      labels:['< 500','1,000\u20132,000','4,000\u20138,000  \u2713','>10,000'],
+      datasets:[{data:[7,19,47,44],backgroundColor:['#C5C4BE','#C5C4BE','#4C44AB','#C5C4BE'],borderRadius:4}]
+    },
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{
+        const p=['5.98%','16.24%','40.17%','37.61%'];
+        return` ${ctx.parsed.x} responses (${p[ctx.dataIndex]})`;
+      }}}},
+      scales:{
+        x:{grid:{color:'rgba(0,0,0,.06)'},border:{display:false},ticks:{font:{size:11},color:'#9B9A96'},title:{display:true,text:'Responses',font:{size:11},color:'#9B9A96'}},
+        y:{grid:{display:false},border:{display:false},ticks:{font:{size:12},color:'#1C1B18'}}
+      }
+    }
+  });
+
+  new Chart(document.getElementById('acquisitionChart'),{
+    type:'bar',
+    data:{
+      labels:['As a baby / toddler','In elementary school','In high school','After high school'],
+      datasets:[{data:[73,32,24,11],backgroundColor:['#4C44AB','#7B74C5','#AFA9EC','#D4D1F5'],borderRadius:4}]
+    },
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{
+        const p=['52.14%','22.86%','17.14%','7.86%'];
+        return` ${ctx.parsed.x} responses (${p[ctx.dataIndex]})`;
+      }}}},
+      scales:{
+        x:{grid:{color:'rgba(0,0,0,.06)'},border:{display:false},ticks:{font:{size:11},color:'#9B9A96'},title:{display:true,text:'Responses',font:{size:11},color:'#9B9A96'}},
+        y:{grid:{display:false},border:{display:false},ticks:{font:{size:12},color:'#1C1B18'}}
+      }
+    }
+  });
+
+  new Chart(document.getElementById('techChart'),{
+    type:'bar',
+    data:{
+      labels:['Yes, often','Yes, occasionally','Once or twice','Never'],
+      datasets:[{data:[29,46,33,17],backgroundColor:['#1A9068','#5DB89A','#B4B2A9','#6B6964'],borderRadius:4}]
+    },
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{
+        const p=['23.2%','36.8%','26.4%','13.6%'];
+        return` ${ctx.parsed.x} responses (${p[ctx.dataIndex]})`;
+      }}}},
+      scales:{
+        x:{grid:{color:'rgba(0,0,0,.06)'},border:{display:false},ticks:{font:{size:11},color:'#9B9A96'},title:{display:true,text:'Responses',font:{size:11},color:'#9B9A96'}},
+        y:{grid:{display:false},border:{display:false},ticks:{font:{size:12},color:'#1C1B18'}}
+      }
+    }
+  });
+
+  new Chart(document.getElementById('qualityChart'),{
+    type:'bar',
+    data:{
+      labels:['As good or better than English','Fine, with minor imperfections',
+        'Noticeable divergence from expectations','Would use again, with caution','Would not use again'],
+      datasets:[{data:[5,50,32,10,2],backgroundColor:['#1A9068','#5DB89A','#E9A97A','#C87540','#C24E2A'],borderRadius:4}]
+    },
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{
+        const p=['5.05%','50.51%','32.32%','10.10%','2.02%'];
+        return` ${ctx.parsed.x} responses (${p[ctx.dataIndex]})`;
+      }}}},
+      scales:{
+        x:{grid:{color:'rgba(0,0,0,.06)'},border:{display:false},ticks:{font:{size:11},color:'#9B9A96'},title:{display:true,text:'Responses',font:{size:11},color:'#9B9A96'}},
+        y:{grid:{display:false},border:{display:false},ticks:{font:{size:12},color:'#1C1B18',autoSkip:false}}
+      }
+    }
+  });
+
+  const centerPlugin={id:'centerText',afterDraw(chart){
+    const{ctx,chartArea:{top,bottom,left,right}}=chart;
+    const cx=(left+right)/2,cy=(top+bottom)/2;
+    ctx.save();
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillStyle='#4C44AB';ctx.font="600 20px 'Lora',Georgia,serif";ctx.fillText('59%',cx,cy-9);
+    ctx.fillStyle='#9B9A96';ctx.font="13px 'Source Sans 3',system-ui,sans-serif";ctx.fillText('said yes',cx,cy+12);
+    ctx.restore();
+  }};
+  new Chart(document.getElementById('studyParticipChart'),{
+    type:'doughnut',
+    data:{labels:['Yes','No'],datasets:[{data:[66,45],backgroundColor:['#4C44AB','#E5E4DF'],borderWidth:0,hoverOffset:4}]},
+    plugins:[centerPlugin],
+    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.parsed} respondents`}}}
+    }
+  });
+
+  new Chart(document.getElementById('studyLangChart'),{
+    type:'bar',
+    data:{
+      labels:['English','Spanish','French','Hindi','Mandarin','German','Japanese','JSL'],
+      datasets:[{data:[66,8,2,1,1,1,1,1],
+        backgroundColor:['#4C44AB','#A86D14','#1A9068','#D85A30','#1557A0','#6B6964','#639922','#3C3489'],
+        borderRadius:4}]
+    },
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{
+        const pct=(ctx.parsed.x/81*100).toFixed(1);
+        return` ${ctx.parsed.x} instance${ctx.parsed.x!==1?'s':''} (${pct}%)`;
+      }}}},
+      scales:{
+        x:{grid:{color:'rgba(0,0,0,.06)'},border:{display:false},ticks:{font:{size:11},color:'#9B9A96'},title:{display:true,text:'Language instances',font:{size:11},color:'#9B9A96'}},
+        y:{grid:{display:false},border:{display:false},ticks:{font:{size:13},color:'#1C1B18'}}
+      }
+    }
+  });
+}
+
+/* ===== INIT ===== */
+document.addEventListener('DOMContentLoaded',()=>{
+  rebuild();
+  buildStaticCharts();
+});
+</script>
+</body>
+</html>
